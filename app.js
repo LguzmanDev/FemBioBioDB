@@ -31,8 +31,12 @@ app.get('/profile/:run', async (req, res) => {
     try {
         const result = await client.query('SELECT * FROM emprendimiento WHERE run = $1', [run]);
         const emprendimiento = result.rows[0];
-        const detalleResult = await client.query('SELECT * FROM detalle WHERE id = $1', [emprendimiento.id]);
+
+        // Asegúrate de que la consulta a la tabla "detalle" esté correcta
+        const detalleResult = await client.query('SELECT * FROM detalle WHERE emprendimiento_id = $1', [emprendimiento.id]);
         const detalle = detalleResult.rows[0];
+
+        // Pasa tanto "emprendimiento" como "detalle" a la plantilla
         res.render('profile', { emprendimiento, detalle });
     } finally {
         client.release();

@@ -1,13 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
+from urllib.parse import quote_plus
 import psycopg2
 import os
-from urllib.parse import quote_plus
-
-def url_quote(s):
-    if isinstance(s, str):
-        s = s.encode("utf-8")
-    return quote_plus(s)
-
 
 app = Flask(__name__)
 
@@ -17,12 +11,18 @@ def get_db_connection():
     conn = psycopg2.connect(DATABASE_URL)
     return conn
 
+def url_quote(s):
+    if isinstance(s, str):
+        s = s.encode("utf-8")
+    return quote_plus(s)
+
 @app.route('/')
 def index():
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM emprendimiento')
     emprendimientos = cursor.fetchall()
+    print(emprendimientos)
     cursor.close()
     conn.close()
     return render_template('index.html', emprendimientos=emprendimientos)
@@ -31,19 +31,15 @@ def index():
 def profile(run):
     conn = get_db_connection()
     cursor = conn.cursor()
-    
     cursor.execute('SELECT * FROM emprendimiento WHERE run = %s', (run,))
     emprendimiento = cursor.fetchone()
-    
     if emprendimiento:
         cursor.execute('SELECT * FROM detalle WHERE id = %s', (emprendimiento[0],))
         detalle = cursor.fetchone()
     else:
         detalle = None
-    
     cursor.close()
     conn.close()
-    
     return render_template('profile.html', emprendimiento=emprendimiento, detalle=detalle)
 
 @app.route('/static/<path:filename>')

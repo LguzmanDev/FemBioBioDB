@@ -1,6 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 import psycopg2
 import os
+from urllib.parse import quote_plus
+
+def url_quote(s):
+    if isinstance(s, str):
+        s = s.encode("utf-8")
+    return quote_plus(s)
+
 
 app = Flask(__name__)
 

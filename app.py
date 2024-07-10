@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 import psycopg2
 import os
 
@@ -12,17 +12,40 @@ def get_db_connection():
 
 @app.route('/')
 def index():
-    return app.send_static_file('index.html')
-
-@app.route('/data')
-def get_data():
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM your_table')  # Cambia 'your_table' por el nombre de tu tabla
-    data = cursor.fetchall()
+    cursor.execute('SELECT * FROM emprendimiento')
+    emprendimientos = cursor.fetchall()
+    print(emprendimientos)  # Esto imprimirá los datos en la consola
     cursor.close()
     conn.close()
-    return jsonify(data)
+    return render_template('index.html', emprendimientos=emprendimientos)
+
+
+@app.route('/profile/<run>')
+def profile(run):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    # Obtener datos del emprendimiento
+    cursor.execute('SELECT * FROM emprendimiento WHERE run = %s', (run,))
+    emprendimiento = cursor.fetchone()
+    
+    # Obtener datos del detalle basado en el id del emprendimiento
+    if emprendimiento:
+        cursor.execute('SELECT * FROM detalle WHERE id = %s', (emprendimiento[0],))
+        detalle = cursor.fetchone()
+    else:
+        detalle = None
+    
+    cursor.close()
+    conn.close()
+    
+    return render_template('profile.html', emprendimiento=emprendimiento, detalle=detalle)
+
+@app.route('/static/<path:filename>')
+def serve_static(filename):
+    return send_from_directory('static', filename)
 
 if __name__ == '__main__':
     app.run(debug=True)

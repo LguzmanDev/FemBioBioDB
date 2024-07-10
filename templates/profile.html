@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Emprendimiento: {{ emprendimiento[1] }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Detalle del Emprendimiento: {{ emprendimiento[4] }}</h1>
+        <div class="details-container">
+            <p><strong>RUN:</strong> <span class="data">{{ emprendimiento[1] }}</span></p>
+            <p><strong>Nombre Emprendimiento:</strong> <span class="data">{{ emprendimiento[3] }}</span></p>
+            <p><strong>RUT:</strong> <span class="data">{{ emprendimiento[2] }}</span></p>
+            <p><strong>Razón Social:</strong> <span class="data">{{ emprendimiento[4] }}</span></p>
+            <p><strong>Nombre Representante:</strong> <span class="data">{{ emprendimiento[5] }}</span></p>
+            <p><strong>Correo Electrónico:</strong> <span class="data">{{ emprendimiento[6] }}</span></p>
+            <p><strong>Teléfono:</strong> <span class="data">{{ emprendimiento[7] }}</span></p>
+            <p><strong>Dirección:</strong> <span class="data">{{ emprendimiento[8] }}</span></p>
+            <p><strong>Provincia:</strong> <span class="data">{{ emprendimiento[9] }}</span></p>
+            <p><strong>Comuna:</strong> <span class="data">{{ emprendimiento[10] }}</span></p>
+            <p><strong>Estado:</strong> <span class="data">{{ emprendimiento[11] }}</span></p>
+        </div>
+        <h2>Detalles:</h2>
+        <div class="details-container">
+            <p><strong>Logo:</strong> <a href="{{ detalle[2] }}" target="_blank">{{ detalle[2] }}</a></p>
+            <p><strong>Video:</strong> <a href="{{ detalle[3] }}" target="_blank">{{ detalle[3] }}</a></p>
+            <p><strong>Redes Sociales:</strong> <a href="{{ detalle[4] }}" target="_blank">{{ detalle[4] }}</a></p>
+            <p><strong>Reseña:</strong> <span class="data">{{ detalle[5] }}</span></p>
+            <p><strong>Productos:</strong> <span class="data">{{ detalle[6] }}</span></p>
+        </div>
+        <a href="/" class="button">Volver a la lista</a>
+    </div>
+</body>
+</html>

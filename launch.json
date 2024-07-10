@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Flask",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/app.py",
+            "env": {
+                "DATABASE_URL": "postgres://sduhhljs:JB7TXM8R7Rsb5To8b2ZodPJ_H7CjAfEv@silly.db.elephantsql.com/sduhhljs"
+            },
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ]
+}

@@ -21,7 +21,6 @@ def index():
     conn.close()
     return render_template('index.html', emprendimientos=emprendimientos)
 
-
 @app.route('/profile/<run>')
 def profile(run):
     conn = get_db_connection()

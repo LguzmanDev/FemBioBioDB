@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Emprendimiento: <%= emprendimiento.razon_social %></title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Detalle del Emprendimiento: <%= emprendimiento.nombre_emprendimiento %></h1>
+        <div class="details-container">
+            <p><strong>RUN:</strong> <span class="data"><%= emprendimiento.run %></span></p>
+            <p><strong>Nombre Emprendimiento:</strong> <span class="data"><%= emprendimiento.nombre_emprendimiento %></span></p>
+            <p><strong>RUT:</strong> <span class="data"><%= emprendimiento.rut %></span></p>
+            <p><strong>Razón Social:</strong> <span class="data"><%= emprendimiento.razon_social %></span></p>
+            <p><strong>Nombre Representante:</strong> <span class="data"><%= emprendimiento.nombre_representante %></span></p>
+            <p><strong>Correo Electrónico:</strong> <span class="data"><%= emprendimiento.correo_electronico %></span></p>
+            <p><strong>Teléfono:</strong> <span class="data"><%= emprendimiento.telefono %></span></p>
+            <p><strong>Dirección:</strong> <span class="data"><%= emprendimiento.direccion %></span></p>
+            <p><strong>Provincia:</strong> <span class="data"><%= emprendimiento.provincia %></span></p>
+            <p><strong>Comuna:</strong> <span class="data"><%= emprendimiento.comuna %></span></p>
+            <p><strong>Estado:</strong> <span class="data"><%= emprendimiento.estado %></span></p>
+        </div>
+        <h2>Detalles:</h2>
+        <div class="details-container">
+            <p><strong>Logo:</strong> <a href="<%= detalle.logo %>" target="_blank"><%= detalle.logo %></a></p>
+            <p><strong>Video:</strong> <a href="<%= detalle.video %>" target="_blank"><%= detalle.video %></a></p>
+            <p><strong>Redes Sociales:</strong> <a href="<%= detalle.redes_sociales %>" target="_blank"><%= detalle.redes_sociales %></a></p>
+            <p><strong>Reseña:</strong> <span class="data"><%= detalle.resena %></span></p>
+            <p><strong>Productos:</strong> <span class="data"><%= detalle.productos %></span></p>
+        </div>
+        <a href="/" class="button">Volver a la lista</a>
+    </div>
+</body>
+</html>

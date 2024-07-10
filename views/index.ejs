@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emprendimientos</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Emprendimientos</h1>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>RUN (clickable)</th>
+                        <th>Nombre Emprendimiento</th>
+                        <th>RUT</th>
+                        <th>Razón Social</th>
+                        <th>Nombre Representante</th>
+                        <th>Correo Electrónico</th>
+                        <th>Teléfono</th>
+                        <th>Dirección</th>
+                        <th>Provincia</th>
+                        <th>Comuna</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% emprendimientos.forEach(emprendimiento => { %>
+                    <tr>
+                        <td><a href="/profile/<%= emprendimiento.run %>"><%= emprendimiento.run %></a></td>
+                        <td><%= emprendimiento.nombre_emprendimiento %></td>
+                        <td><%= emprendimiento.rut %></td>
+                        <td><%= emprendimiento.razon_social %></td>
+                        <td><%= emprendimiento.nombre_representante %></td>
+                        <td><%= emprendimiento.correo_electronico %></td>
+                        <td><%= emprendimiento.telefono %></td>
+                        <td><%= emprendimiento.direccion %></td>
+                        <td><%= emprendimiento.provincia %></td>
+                        <td><%= emprendimiento.comuna %></td>
+                        <td class="status-cell">
+                            <span class="circle <%= emprendimiento.estado === 'si' ? 'green' : (emprendimiento.estado === 'error' ? 'yellow' : 'red') %>"></span>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

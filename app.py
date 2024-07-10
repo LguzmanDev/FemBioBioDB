@@ -16,22 +16,18 @@ def index():
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM emprendimiento')
     emprendimientos = cursor.fetchall()
-    print(emprendimientos)  # Esto imprimirá los datos en la consola
     cursor.close()
     conn.close()
     return render_template('index.html', emprendimientos=emprendimientos)
-
 
 @app.route('/profile/<run>')
 def profile(run):
     conn = get_db_connection()
     cursor = conn.cursor()
     
-    # Obtener datos del emprendimiento
     cursor.execute('SELECT * FROM emprendimiento WHERE run = %s', (run,))
     emprendimiento = cursor.fetchone()
     
-    # Obtener datos del detalle basado en el id del emprendimiento
     if emprendimiento:
         cursor.execute('SELECT * FROM detalle WHERE id = %s', (emprendimiento[0],))
         detalle = cursor.fetchone()

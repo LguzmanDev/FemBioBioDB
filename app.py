@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
-from urllib.parse import quote_plus
 import psycopg2
 import os
+from urllib.parse import quote_plus
 
 app = Flask(__name__)
 
@@ -22,7 +22,7 @@ def index():
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM emprendimiento')
     emprendimientos = cursor.fetchall()
-    print(emprendimientos)
+    print(emprendimientos)  # Esto imprimirá los datos en la consola
     cursor.close()
     conn.close()
     return render_template('index.html', emprendimientos=emprendimientos)
@@ -31,15 +31,21 @@ def index():
 def profile(run):
     conn = get_db_connection()
     cursor = conn.cursor()
+    
+    # Obtener datos del emprendimiento
     cursor.execute('SELECT * FROM emprendimiento WHERE run = %s', (run,))
     emprendimiento = cursor.fetchone()
+    
+    # Obtener datos del detalle basado en el id del emprendimiento
     if emprendimiento:
         cursor.execute('SELECT * FROM detalle WHERE id = %s', (emprendimiento[0],))
         detalle = cursor.fetchone()
     else:
         detalle = None
+    
     cursor.close()
     conn.close()
+    
     return render_template('profile.html', emprendimiento=emprendimiento, detalle=detalle)
 
 @app.route('/static/<path:filename>')

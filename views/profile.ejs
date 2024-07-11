@@ -27,10 +27,9 @@
             <p><strong>Video:</strong> <a href="<%= detalle.video %>" target="_blank"><%= detalle.video %></a></p>
             <p><strong>Redes Sociales:</strong> <a href="<%= detalle.redes_sociales %>" target="_blank"><%= detalle.redes_sociales %></a></p>
             <p><strong>Reseña:</strong> <span class="data"><%= detalle.resena %></span></p>
-            <p><strong>Productos:</strong> <span class="data"><%= detalle.productos %></span></p>
+            <p><strong>Productos:</strong> <span class="data"><%- detalle.productos.replace(/(https?:\/\/\S+)/g, '<a href="$1" target="_blank">$1</a>') %></span></p>
             <p><strong>Notas:</strong> <span class="data"><%= detalle.notas %></span></p>
         </div>
-        <br>
         <a href="/" class="button">Volver a la lista</a>
     </div>
 </body>

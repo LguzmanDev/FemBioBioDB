@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', async (req, res) => {
     const client = await pool.connect();
     try {
-        const result = await client.query('SELECT * FROM emprendimiento');
+        const result = await client.query("SELECT * FROM emprendimiento WHERE estado != 'si'");
         res.render('index', { emprendimientos: result.rows });
     } finally {
         client.release();
